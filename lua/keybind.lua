@@ -1,11 +1,11 @@
 local keymap = vim.keymap.set
 
 -- session
-keymap("n", "<leader>ss", "<cmd>mksession! ~/.vim_recently_session<CR>")
-keymap("n", "<leader>sl", "<cmd>source ~/.vim_recently_session<CR>")
+keymap("n", "<leader>ss", "<cmd>mksession! ~/.vim_recently_session<CR>", { silent = true })
+keymap("n", "<leader>sl", "<cmd>source ~/.vim_recently_session<CR>", { silent = true })
 
 -- markdown preview
-keymap("n", "<leader>m", "<cmd>MarkdownPreview<CR>")
+keymap("n", "<leader>m", "<cmd>MarkdownPreview<CR>", { silent = true })
 
 -- outline
 keymap("n", "<leader>o", "<cmd>SymbolsOutline<CR>", { silent = true })

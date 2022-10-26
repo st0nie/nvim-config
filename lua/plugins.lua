@@ -7,7 +7,7 @@ return require("packer").startup(function()
 		config = function()
 			local servers = { "pyright", "sumneko_lua", "clangd", "rust_analyzer" }
 			local capabilities =
-				require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+				require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 			for i = 1, #servers do
 				require("lspconfig")[servers[i]].setup({
 					capabilities = capabilities,
@@ -101,7 +101,7 @@ return require("packer").startup(function()
 		end,
 		config = function()
 			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "c", "lua", "python", "rust" },
+				ensure_installed = { "c", "lua", "python", "rust", "markdown" },
 				auto_install = false,
 				highlight = {
 					enable = true,
@@ -113,7 +113,6 @@ return require("packer").startup(function()
 					max_file_lines = nil,
 				},
 			})
-			require("nvim-treesitter.install").prefer_git = true
 		end,
 	})
 
