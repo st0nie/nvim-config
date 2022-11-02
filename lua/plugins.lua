@@ -142,6 +142,7 @@ return require("packer").startup(function()
 					python = "python3 -u",
 					c = "cd $dir && clang $fileName -o $fileNameWithoutExt && $dir/$fileNameWithoutExt",
 					PKGBUILD = "makepkg -sc",
+					rust = "cd $dir && rustc $fileName && $dir/$fileNameWithoutExt",
 				},
 			})
 		end,
@@ -249,4 +250,5 @@ return require("packer").startup(function()
 			vim.fn["mkdp#util#install"]()
 		end,
 	})
+	use({ "onsails/lspkind.nvim" })
 end)
