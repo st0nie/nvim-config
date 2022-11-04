@@ -103,7 +103,7 @@ please refer to the `keybind.lua` for more keymaps.
 
 `gr` rename
 
-`gd` peek to definition
+`gd` peek definition
 
 `cd` show the diagnostics of the symbol under the cursor
 
