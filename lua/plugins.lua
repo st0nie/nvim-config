@@ -12,7 +12,7 @@ return require("packer").startup(function()
 		"hrsh7th/nvim-cmp",
 		after = { "nvim-autopairs" },
 		config = function()
-			require("plugconf.cmp_setting")
+			require("plugconf.cmp")
 		end,
 	})
 	use({
