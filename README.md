@@ -85,6 +85,7 @@ please refer to the `keybind.lua` for more keymaps.
 ### Nvim Tree
 
 `<leader>n` `<F1>` toggle nvim tree
+
 ### Telescope
 
 `<leader>ff` find file
