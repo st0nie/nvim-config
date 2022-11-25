@@ -32,9 +32,9 @@ return require("packer").startup(function()
 		requires = "L3MON4D3/LuaSnip",
 	})
 	use({
-		"Mofiqul/vscode.nvim",
+		"navarasu/onedark.nvim",
 		config = function()
-			vim.cmd("colorscheme vscode")
+			vim.cmd("colorscheme onedark")
 		end,
 	})
 	use({
