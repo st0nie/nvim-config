@@ -26,7 +26,7 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 
 2.Backup your original configuration.
 
-```
+```sh
 mv ~/.config/nvim ~/.config/nvim.back 
 ```
 
