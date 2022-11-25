@@ -1,6 +1,6 @@
 # nvim-config
 
-![screenshot](./resources/2022-11-04_17:10:38.webp)
+![screenshot](resources/Screenshot_20221125_115248.png)
 
 A Neovim configuration that works out of the box.
 - Fast :
