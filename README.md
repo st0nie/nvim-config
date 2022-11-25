@@ -110,6 +110,8 @@ please refer to the `keybind.lua` for more keymaps.
 
 `gd` peek definition
 
+see [lspsaga](https://github.com/glepnir/lspsaga.nvim#configuration) for more information.
+
 `cd` show the diagnostics of the symbol under the cursor
 
 `e] [e`  `E] [E` go to the next(previous) diagnostic(error)
