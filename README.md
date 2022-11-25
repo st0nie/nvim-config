@@ -110,7 +110,7 @@ please refer to the `keybind.lua` for more keymaps.
 
 `gd` peek definition
 
-see [lspsaga](https://github.com/glepnir/lspsaga.nvim#configuration) for more information.
+see [lspsaga][lspsaga_configuration] for more information.
 
 `cd` show the diagnostics of the symbol under the cursor
 
@@ -118,3 +118,4 @@ see [lspsaga](https://github.com/glepnir/lspsaga.nvim#configuration) for more in
 
 `K` show the document of the symbol under the cursor
 
+[lspsaga_configuration]: https://github.com/glepnir/lspsaga.nvim#configuration
