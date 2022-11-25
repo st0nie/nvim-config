@@ -103,11 +103,15 @@ please refer to the `keybind.lua` for more keymaps.
 
 `<leader>fh` find help
 
-### Lsp
+### Lsp and autocompletion
 
 `Space` trigger completion when there is no completion menu
 
 `Tab` The same as space but comfirm the selection if you have selected one.
+
+`<C-j>` `arrowdown` `<C-n>` select next completion item.
+
+`<C-k>` `arrowup` `<C-p>` select next completion item.
 
 `gh` run the lsp finder(lspsaga)
 
