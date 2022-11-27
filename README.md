@@ -105,7 +105,7 @@ please refer to the `keybind.lua` for more keymaps.
 
 ### Lsp and autocompletion
 
-`Space` trigger completion when there is no completion menu
+`<C-Space>` trigger completion when there is no completion menu
 
 `Tab` The same as space but comfirm the selection if you have selected one.
 

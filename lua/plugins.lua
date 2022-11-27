@@ -32,9 +32,9 @@ return require("packer").startup(function()
 		requires = "L3MON4D3/LuaSnip",
 	})
 	use({
-		"navarasu/onedark.nvim",
+		"EdenEast/nightfox.nvim",
 		config = function()
-			vim.cmd("colorscheme onedark")
+			vim.cmd("colorscheme carbonfox")
 		end,
 	})
 	use({
