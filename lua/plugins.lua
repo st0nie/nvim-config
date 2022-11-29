@@ -32,9 +32,9 @@ return require("packer").startup(function()
 		requires = "L3MON4D3/LuaSnip",
 	})
 	use({
-		"EdenEast/nightfox.nvim",
+		"sainnhe/sonokai",
 		config = function()
-			vim.cmd("colorscheme carbonfox")
+			vim.cmd("colorscheme sonokai")
 		end,
 	})
 	use({
