@@ -1,5 +1,13 @@
 local keymap = vim.keymap.set
 
+-- terminal
+keymap("n", "<A-d>", "<cmd>FloatermToggle<CR>", { silent = true })
+keymap("t", "<A-d>", [[<C-\><C-n><cmd>FloatermToggle<CR>]], { silent = true })
+keymap("n", "<leader>ra", "<cmd>FloatermNew ranger<CR>", { silent = true })
+keymap("n", "<leader>ff", "<cmd>FloatermNew fzf<CR>", { silent = true })
+keymap("n", "<leader>lg", "<cmd>FloatermNew lazygit<CR>", { silent = true })
+keymap("n", "<leader>fg", ":FloatermNew rg ", { silent = false })
+
 -- session
 keymap("n", "<leader>ss", "<cmd>mksession! ~/.vim_recently_session<CR>", { silent = true })
 keymap("n", "<leader>sl", "<cmd>source ~/.vim_recently_session<CR>", { silent = true })
@@ -11,16 +19,13 @@ keymap("n", "<leader>m", "<cmd>MarkdownPreview<CR>", { silent = true })
 keymap("n", "<leader>o", "<cmd>SymbolsOutline<CR>", { silent = true })
 
 -- buffers
+keymap("n", "<leader>b", ":ls <Cr>:b<Space>", { silent = false })
 keymap("n", "<leader>bd", "<cmd>bdelete<CR>", { silent = true })
-keymap("n", "<leader>bp", "<cmd>bprevious<CR>", { silent = true })
-keymap("n", "<leader>bn", "<cmd>bnext<CR>", { silent = true })
+keymap("n", "[b", "<cmd>bprevious<CR>", { silent = true })
+keymap("n", "]b", "<cmd>bnext<CR>", { silent = true })
 
 -- format
 keymap("n", "<F4>", "<cmd>Neoformat<CR>", { silent = true })
-
--- terminal
-keymap("n", "<A-d>", "<cmd>FloatermToggle<CR>", { silent = true })
-keymap("t", "<A-d>", [[<C-\><C-n><cmd>FloatermToggle<CR>]], { silent = true })
 
 -- code_runner
 keymap("n", "<F5>", ":RunCode<CR>", { silent = true })
@@ -37,12 +42,6 @@ keymap("n", "<leader>n", ":NvimTreeToggle<CR>", { silent = true })
 keymap("n", "<leader>nf", ":NvimTreeFocus<CR>", { silent = true })
 keymap("n", "<leader>nff", ":NvimTreeFindFile<CR>", { silent = true })
 keymap("n", "<leader>nc", ":NvimTreeCollapse<CR>", { silent = true })
-
--- telescope
-keymap("n", "<leader>ff", ":Telescope find_files<CR>", { silent = true })
-keymap("n", "<leader>fg", ":Telescope live_grep<CR>", { silent = true })
-keymap("n", "<leader>fb", ":Telescope buffers<CR>", { silent = true })
-keymap("n", "<leader>fh", ":Telescope help_tags<CR>", { silent = true })
 
 -- Lspsaga
 keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })

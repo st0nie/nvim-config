@@ -57,29 +57,33 @@ git clone --depth 1 https://github.com/ston-afk/nvim-config\
 
 ### Outline
 
-`<leader>o` `<F6>` symbols outline
+`<leader>o` symbols outline
 
 ### Buffers
 
+`<leader>b` switch to a buffer
+
+`]b` switch to next buffer
+
+`[b` switch to previous buffer
+
 `<leader>bd` delete a buffer
-
-`<leader>bp` `<F2>` go to the previous buffer
-
-`<leader>bn` `<F3>` go to the next buffer
 
 ### Format
 
 `<F4>` formatting the buffer with neoformat
 
-### Terminal
+### Terminal and finder
 
-`<F9>` create a floating terminal
+`<leader>ff` find file
 
-`<F10>` go to the previous floating terminal
+`<leader>fg` find live_grep
 
-`<F11>` go to the next floating terminal
+`<leader>lg` lazygit
 
-`<A-d>` `<F12>` toggle floating terminal
+`<leader>lg` ranger
+
+`<A-d>` toggle floating terminal
 
 ### Code Runner
 
@@ -91,17 +95,7 @@ please refer to the `keybind.lua` for more keymaps.
 
 ### Nvim Tree
 
-`<leader>n` `<F1>` toggle nvim tree
-
-### Telescope
-
-`<leader>ff` find file
-
-`<leader>fg` find live_grep
-
-`<leader>fb` find opened buffers
-
-`<leader>fh` find help
+`<leader>n` toggle nvim tree
 
 ### Lsp and autocompletion
 

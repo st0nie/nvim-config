@@ -96,16 +96,13 @@ return require("packer").startup(function()
 			require("plugconf.tree")
 		end,
 	})
-	use({
-		"nvim-telescope/telescope.nvim",
-		requires = { { "nvim-lua/plenary.nvim" } },
-	})
 	use("glepnir/lspsaga.nvim")
 	use({
 		"voldikss/vim-floaterm",
 		config = function()
 			vim.g.floaterm_width = 0.8
 			vim.g.floaterm_height = 0.8
+			vim.g.floaterm_opener = 'edit'
 		end,
 	})
 	use({
