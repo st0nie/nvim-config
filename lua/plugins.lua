@@ -112,13 +112,6 @@ return require("packer").startup(function()
 		"sbdchd/neoformat",
 	})
 	use({
-		"glepnir/dashboard-nvim",
-		after = { "telescope.nvim", "nvim-tree.lua" },
-		config = function()
-			require("plugconf.dashboard")
-		end,
-	})
-	use({
 		"simrat39/symbols-outline.nvim",
 		config = function()
 			require("symbols-outline").setup()

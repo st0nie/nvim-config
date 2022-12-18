@@ -9,29 +9,18 @@ keymap("n", "<leader>m", "<cmd>MarkdownPreview<CR>", { silent = true })
 
 -- outline
 keymap("n", "<leader>o", "<cmd>SymbolsOutline<CR>", { silent = true })
-keymap("n", "<F6>", "<cmd>SymbolsOutline<CR>", { silent = true })
 
 -- buffers
 keymap("n", "<leader>bd", "<cmd>bdelete<CR>", { silent = true })
 keymap("n", "<leader>bp", "<cmd>bprevious<CR>", { silent = true })
-keymap("n", "<F2>", "<cmd>bprevious<CR>", { silent = true })
 keymap("n", "<leader>bn", "<cmd>bnext<CR>", { silent = true })
-keymap("n", "<F3>", "<cmd>bnext<CR>", { silent = true })
 
 -- format
 keymap("n", "<F4>", "<cmd>Neoformat<CR>", { silent = true })
 
 -- terminal
-keymap("n", "<F9>", "<cmd>FloatermNew<CR>", { silent = true })
-keymap("t", "<F9>", [[<C-\><C-n><cmd>FloatermNew<CR>]], { silent = true })
-keymap("n", "<F10>", "<cmd>FloatermPrev<CR>", { silent = true })
-keymap("t", "<F10>", [[<C-\><C-n><cmd>FloatermPrev<CR>]], { silent = true })
-keymap("n", "<F11>", "<cmd>FloatermNext<CR>", { silent = true })
-keymap("t", "<F11>", [[<C-\><C-n><cmd>FloatermNext<CR>]], { silent = true })
 keymap("n", "<A-d>", "<cmd>FloatermToggle<CR>", { silent = true })
 keymap("t", "<A-d>", [[<C-\><C-n><cmd>FloatermToggle<CR>]], { silent = true })
-keymap("n", "<F12>", "<cmd>FloatermToggle<CR>", { silent = true })
-keymap("t", "<F12>", [[<C-\><C-n><cmd>FloatermToggle<CR>]], { silent = true })
 
 -- code_runner
 keymap("n", "<F5>", ":RunCode<CR>", { silent = true })
@@ -45,7 +34,6 @@ keymap("n", "<leader>crp", ":CRProjects<CR>", { silent = true })
 
 -- nvim_tree
 keymap("n", "<leader>n", ":NvimTreeToggle<CR>", { silent = true })
-keymap("n", "<F1>", ":NvimTreeToggle<CR>", { silent = true })
 keymap("n", "<leader>nf", ":NvimTreeFocus<CR>", { silent = true })
 keymap("n", "<leader>nff", ":NvimTreeFindFile<CR>", { silent = true })
 keymap("n", "<leader>nc", ":NvimTreeCollapse<CR>", { silent = true })
