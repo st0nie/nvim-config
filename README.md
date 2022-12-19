@@ -97,6 +97,12 @@ please refer to the `keybind.lua` for more keymaps.
 
 `<leader>n` toggle nvim tree
 
+`<leader>nf` focus nvim tree
+
+`<leader>nff` nvim tree find file
+
+`<leader>nc` nvim tree collapse
+
 ### Lsp and autocompletion
 
 `<C-Space>` trigger completion when there is no completion menu
