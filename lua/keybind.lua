@@ -3,10 +3,11 @@ local keymap = vim.keymap.set
 -- terminal
 keymap("n", "<A-d>", "<cmd>FloatermToggle<CR>", { silent = true })
 keymap("t", "<A-d>", [[<C-\><C-n><cmd>FloatermToggle<CR>]], { silent = true })
-keymap("n", "<leader>ra", "<cmd>FloatermNew ranger<CR>", { silent = true })
-keymap("n", "<leader>ff", "<cmd>FloatermNew fzf<CR>", { silent = true })
-keymap("n", "<leader>lg", "<cmd>FloatermNew --opener=vsplit lazygit<CR>", { silent = true })
-keymap("n", "<leader>fg", ":FloatermNew rg ", { silent = false })
+keymap("n", "<leader>ra", "<cmd>FloatermNew --opener=edit ranger<CR>", { silent = true })
+keymap("n", "<leader>ff", "<cmd>FloatermNew --opener=edit fzf<CR>", { silent = true })
+keymap("n", "<leader>lg", "<cmd>FloatermNew lazygit<CR>", { silent = true })
+vim.cmd(":command -nargs=1 Rg FloatermNew --opener=edit rg <args>")
+keymap("n", "<leader>fg", ":Rg ", { silent = false })
 
 -- session
 keymap("n", "<leader>ss", "<cmd>mksession! ~/.vim_recently_session<CR>", { silent = true })
