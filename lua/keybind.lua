@@ -20,8 +20,8 @@ keymap("n", "<leader>m", "<cmd>MarkdownPreview<CR>", { silent = true })
 keymap("n", "<leader>o", "<cmd>SymbolsOutline<CR>", { silent = true })
 
 -- buffers
-keymap("n", "<leader>b", ":ls <Cr>:b<Space>", { silent = false })
-keymap("n", "<leader>bd", "<cmd>bdelete<CR>", { silent = true })
+keymap("n", "<leader>fb", ":ls <Cr>:b<Space>", { silent = false })
+keymap("n", "<leader>db", "<cmd>bdelete<CR>", { silent = true })
 keymap("n", "[b", "<cmd>bprevious<CR>", { silent = true })
 keymap("n", "]b", "<cmd>bnext<CR>", { silent = true })
 
