@@ -5,7 +5,7 @@ keymap("n", "<A-d>", "<cmd>FloatermToggle<CR>", { silent = true })
 keymap("t", "<A-d>", [[<C-\><C-n><cmd>FloatermToggle<CR>]], { silent = true })
 keymap("n", "<leader>ra", "<cmd>FloatermNew ranger<CR>", { silent = true })
 keymap("n", "<leader>ff", "<cmd>FloatermNew fzf<CR>", { silent = true })
-keymap("n", "<leader>lg", "<cmd>FloatermNew lazygit<CR>", { silent = true })
+keymap("n", "<leader>lg", "<cmd>FloatermNew --opener=vsplit lazygit<CR>", { silent = true })
 keymap("n", "<leader>fg", ":FloatermNew rg ", { silent = false })
 
 -- session
