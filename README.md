@@ -2,42 +2,42 @@
 
 ![screenshot](resources/Screenshot_20221125_115248.png)
 
-A Neovim configuration that works out of the box.
+A Neovim configuration that works out of the box
 
 - Fast :
-Most of the configuration files are written in lua.
-- User friendly : Including many essential plugins.
-- Lsp : Use nvim's built-in lsp.
+Most of the configuration files are written in lua
+- User friendly : Including many essential plugins
+- Lsp : Use nvim's built-in lsp
 - Floaterm
 - Markdown preview
 - Code runner
 - ...
 
-For more information, see plugins.lua.
+For more information, see plugins.lua
 
 ## usage
 
-1.Install Packer.nvim.
+1.Install Packer.nvim
 
 ```sh
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 ```
 
-2.Backup your original configuration.
+2.Backup your original configuration
 
 ```sh
 mv ~/.config/nvim ~/.config/nvim.back 
 ```
 
-3.Clone this repository.
+3.Clone this repository
 
 ```sh
 git clone --depth 1 https://github.com/ston-afk/nvim-config\
  ~/.config/nvim
 ```
 
-4.Run ":PackerSync" in neovim.
+4.Run ":PackerSync" in neovim
 
 ```vim
 :PackerSync
@@ -81,7 +81,7 @@ git clone --depth 1 https://github.com/ston-afk/nvim-config\
 
 `<leader>lg` lazygit
 
-`<leader>lg` ranger
+`<leader>ra` ranger
 
 `<A-d>` toggle floating terminal
 
@@ -91,7 +91,7 @@ git clone --depth 1 https://github.com/ston-afk/nvim-config\
 
 `<leader>rf` run file
 
-please refer to the `keybind.lua` for more keymaps.
+please refer to the `keybind.lua` for more keymaps
 
 ### Nvim Tree
 
@@ -107,11 +107,11 @@ please refer to the `keybind.lua` for more keymaps.
 
 `<C-Space>` trigger completion when there is no completion menu
 
-`Tab` The same as space but comfirm the selection if you have selected one.
+`Tab` The same as space but comfirm the selection if you have selected one
 
-`<C-j>` `arrowdown` `<C-n>` select next completion item.
+`<C-j>` `arrowdown` `<C-n>` select next completion item
 
-`<C-k>` `arrowup` `<C-p>` select next completion item.
+`<C-k>` `arrowup` `<C-p>` select next completion item
 
 `gh` run the lsp finder(lspsaga)
 
@@ -121,12 +121,16 @@ please refer to the `keybind.lua` for more keymaps.
 
 `gd` peek definition
 
-see [lspsaga][lspsaga_configuration] for more information.
+see [lspsaga][lspsaga_configuration] for more information
 
 `cd` show the diagnostics of the symbol under the cursor
 
 `e] [e`  `E] [E` go to the next(previous) diagnostic(error)
 
 `K` show the document of the symbol under the cursor
+
+### sudo save
+
+`:w!!` force save with sudo using suda.vim
 
 [lspsaga_configuration]: https://github.com/glepnir/lspsaga.nvim#configuration
