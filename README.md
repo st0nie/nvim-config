@@ -131,6 +131,6 @@ see [lspsaga][lspsaga_configuration] for more information
 
 ### sudo save
 
-`:w!!` force save with sudo using suda.vim
+`:w!!` `<leader>fw` force save with sudo using suda.vim
 
 [lspsaga_configuration]: https://github.com/glepnir/lspsaga.nvim#configuration
