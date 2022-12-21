@@ -1,7 +1,7 @@
 local keymap = vim.keymap.set
 
 -- force save
-keymap("n", "<leader>fw", "<cmd>w !sudo tee %<CR>", { silent = true })
+vim.cmd[[cnoreabbrev w!! SudaWrite]]
 
 -- terminal
 keymap("n", "<A-d>", "<cmd>FloatermToggle<CR>", { silent = true })
