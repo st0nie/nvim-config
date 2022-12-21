@@ -24,6 +24,7 @@ return require("packer").startup(function()
 		end,
 	})
 	use({ "hrsh7th/cmp-nvim-lsp", requires = "hrsh7th/nvim-cmp" })
+	use({ "hrsh7th/cmp-nvim-lsp-signature-help", requires = "hrsh7th/nvim-cmp" })
 	use({ "hrsh7th/cmp-buffer", requires = "hrsh7th/nvim-cmp" })
 	use({ "hrsh7th/cmp-path", requires = "hrsh7th/nvim-cmp" })
 	use({ "hrsh7th/cmp-cmdline", requires = "hrsh7th/nvim-cmp" })

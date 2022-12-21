@@ -104,6 +104,7 @@ cmp.setup({
 	sources = cmp.config.sources({
 		{ name = "cmp_tabnine" },
 		{ name = "nvim_lsp" },
+		{ name = "nvim_lsp_signature_help" },
 		{ name = "luasnip" },
 	}, {
 		{ name = "buffer" },
@@ -118,7 +119,12 @@ cmp.setup.filetype("gitcommit", {
 	}),
 })
 
+local cmpopt_cmdline = {
+	completeopt = "menu,menuone,noselect",
+}
+
 cmp.setup.cmdline({ "/", "?" }, {
+	completion = cmpopt_cmdline,
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
 		{ name = "buffer" },
@@ -126,6 +132,7 @@ cmp.setup.cmdline({ "/", "?" }, {
 })
 
 cmp.setup.cmdline(":", {
+	completion = cmpopt_cmdline,
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
 		{ name = "path" },
