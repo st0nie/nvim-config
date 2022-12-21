@@ -1,5 +1,7 @@
 require("plugins")
 require("keybind")
+require("indent")
+require("skeleton")
 
 -- disable netrw
 vim.g.loaded = 1
@@ -26,13 +28,3 @@ vim.o.cursorcolumn = true
 -- indent
 vim.o.shiftwidth = 4
 vim.o.tabstop = 4
-
--- c indent
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-	pattern = { "*.c", "*.h" },
-	callback = function()
-		vim.opt_local.shiftwidth = 4
-		vim.opt_local.tabstop = 4
-		vim.opt_local.expandtab = true
-	end,
-})

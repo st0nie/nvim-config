@@ -1,5 +1,8 @@
 local keymap = vim.keymap.set
 
+-- force save
+keymap("n", "<leader>fw", "<cmd>w !sudo tee %<CR>", { silent = true })
+
 -- terminal
 keymap("n", "<A-d>", "<cmd>FloatermToggle<CR>", { silent = true })
 keymap("t", "<A-d>", [[<C-\><C-n><cmd>FloatermToggle<CR>]], { silent = true })
