@@ -75,6 +75,14 @@ git clone --depth 1 https://github.com/ston-afk/nvim-config\
 
 ### Terminal and finder
 
+`<leader>]t` next terminal
+
+`<leader>[t` previous terminal
+
+`<leader>tn` new terminal
+
+`<leader>tk` kill terminal
+
 `<leader>ff` find file
 
 `<leader>fg` find live_grep
