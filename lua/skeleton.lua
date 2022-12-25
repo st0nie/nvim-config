@@ -1,7 +1,10 @@
 -- ebuild skeleton
 vim.api.nvim_create_autocmd({ "BufNewFile" }, {
 	pattern = "*.ebuild",
-	command = "0r ~/模板/skeleton.ebuild",
+	callback = function()
+		vim.cmd("0r ~/模板/skeleton.ebuild")
+		vim.cmd("0r /var/db/repos/gentoo/header.txt")
+	end,
 })
 
 vim.api.nvim_create_autocmd({ "BufNewFile" }, {
