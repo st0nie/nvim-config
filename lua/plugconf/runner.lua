@@ -6,4 +6,11 @@ require("code_runner").setup({
 		PKGBUILD = "cd $dir && makepkg -scf",
 		rust = "cd $dir && rustc $fileName && $dir/$fileNameWithoutExt",
 	},
+	project = {
+		["~/工作区/go-musicfox"] = {
+			name = "musicfox",
+			discription = "Command-line Netease Cloud Music written in Go",
+			command = "go run ./cmd/musicfox.go",
+		},
+	},
 })
