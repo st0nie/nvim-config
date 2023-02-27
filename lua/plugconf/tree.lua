@@ -1,24 +1,20 @@
+local function open_nvim_tree(data)
+  local directory = vim.fn.isdirectory(data.file) == 1
+  if not directory then
+    return
+  end
+  vim.cmd.cd(data.file)
+  require("nvim-tree.api").tree.open()
+end
+
+vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
+
 require("nvim-tree").setup({
 	sort_by = "case_sensitive",
-	sync_root_with_cwd = true,
-	view = {
-		adaptive_size = true,
-		mappings = {
-			list = {
-				{ key = "u", action = "dir_up" },
-			},
-		},
-	},
 	renderer = {
 		group_empty = true,
 	},
-	diagnostics = {
-		enable = true,
-		show_on_dirs = true,
-	},
-	actions = {
-		change_dir = {
-			enable = true,
-		},
+	filters = {
+		dotfiles = true,
 	},
 })
