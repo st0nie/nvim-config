@@ -15,14 +15,6 @@ return require("packer").startup(function()
 			require("plugconf.cmp")
 		end,
 	})
-	use({
-		"tzachar/cmp-tabnine",
-		run = "./install.sh",
-		requires = "hrsh7th/nvim-cmp",
-		config = function()
-			require("plugconf.t9")
-		end,
-	})
 	use({ "hrsh7th/cmp-nvim-lsp", requires = "hrsh7th/nvim-cmp" })
 	use({ "hrsh7th/cmp-nvim-lsp-signature-help", requires = "hrsh7th/nvim-cmp" })
 	use({ "hrsh7th/cmp-buffer", requires = "hrsh7th/nvim-cmp" })
@@ -91,19 +83,12 @@ return require("packer").startup(function()
 			require("plugconf.runner")
 		end,
 	})
-	use({
-		"kyazdani42/nvim-tree.lua",
-		config = function()
-			require("plugconf.tree")
-		end,
-	})
 	use("glepnir/lspsaga.nvim")
 	use({
-		"voldikss/vim-floaterm",
+		"akinsho/toggleterm.nvim",
+		tag = "*",
 		config = function()
-			vim.g.floaterm_width = 0.8
-			vim.g.floaterm_height = 0.8
-			vim.g.floaterm_opener = "vsplit"
+			require("toggleterm").setup()
 		end,
 	})
 	use({
@@ -131,4 +116,64 @@ return require("packer").startup(function()
 		end,
 	})
 	use({ "lambdalisue/suda.vim" })
+	use({
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.1",
+		requires = { { "nvim-lua/plenary.nvim" } },
+	})
+	use({
+		"rcarriga/nvim-dap-ui",
+		requires = { "mfussenegger/nvim-dap" },
+		config = function()
+			require("plugconf.dap")
+		end,
+	})
+	use({
+		"goolord/alpha-nvim",
+		requires = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("alpha").setup(require("alpha.themes.startify").config)
+		end,
+	})
+	use({
+		"Shatur/neovim-session-manager",
+		requires = { { "nvim-lua/plenary.nvim" } },
+		config = function()
+			local Path = require("plenary.path")
+			require("session_manager").setup({
+				sessions_dir = Path:new(vim.fn.stdpath("data"), "sessions"), -- The directory where the session files will be saved.
+				path_replacer = "__", -- The character to which the path separator will be replaced for session files.
+				colon_replacer = "++", -- The character to which the colon symbol will be replaced for session files.
+				autoload_mode = require("session_manager.config").AutoloadMode.LastSession, -- Define what to do when Neovim is started without arguments. Possible values: Disabled, CurrentDir, LastSession
+				autosave_last_session = true, -- Automatically save last session on exit and on session switch.
+				autosave_ignore_not_normal = true, -- Plugin will not save a session when no buffers are opened, or all of them aren't writable or listed.
+				autosave_ignore_dirs = {}, -- A list of directories where the session will not be autosaved.
+				autosave_ignore_filetypes = { -- All buffers of these file types will be closed before the session is saved.
+					"gitcommit",
+				},
+				autosave_ignore_buftypes = {}, -- All buffers of these bufer types will be closed before the session is saved.
+				autosave_only_in_session = false, -- Always autosaves session. If true, only autosaves after a session is active.
+				max_path_length = 80, -- Shorten the display path if length exceeds this threshold. Use 0 if don't want to shorten the path at all.
+			})
+			local config_group = vim.api.nvim_create_augroup("MyConfigGroup", {}) -- A global group for all your config autocommands
+
+			vim.api.nvim_create_autocmd({ "User" }, {
+				pattern = "SessionLoadPost",
+				group = config_group,
+				callback = function()
+					require("nvim-tree").toggle(false, true)
+				end,
+			})
+		end,
+	})
+	use({
+		"nvim-tree/nvim-tree.lua",
+		requires = {
+			"nvim-tree/nvim-web-devicons", -- optional, for file icons
+		},
+		tag = "nightly", -- optional, updated every week. (see issue #1193)
+		config = function ()
+			require('plugconf.tree')
+		end
+	})
 end)
