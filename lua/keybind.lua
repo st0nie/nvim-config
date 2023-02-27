@@ -33,6 +33,7 @@ keymap("n", "<leader>bp", "<cmd>bnext<CR>", { silent = true })
 keymap("n", "<F4>", "<cmd>Neoformat<CR>", { silent = true })
 
 -- code_runner
+keymap("n", "<F5>", ":RunCode<CR>", { silent = true })
 keymap("n", "<leader>r", ":RunCode<CR>", { silent = true })
 keymap("n", "<leader>rf", ":RunFile<CR>", { silent = true })
 keymap("n", "<leader>rft", ":RunFile tab<CR>", { silent = true })
@@ -71,7 +72,7 @@ keymap("n", "<leader>fb", builtin.buffers, { silent = true })
 keymap("n", "<leader>fh", builtin.help_tags, { silent = true })
 
 -- dap
-keymap("n", "<F5>", function()
+keymap("n", "<F17>", function() -- Shift+F5
 	require("dap").continue()
 end)
 keymap("n", "<F10>", function()

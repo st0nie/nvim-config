@@ -28,3 +28,6 @@ vim.o.cursorcolumn = true
 -- indent
 vim.o.shiftwidth = 4
 vim.o.tabstop = 4
+
+-- use system clipboard
+vim.o.clipboard = "unnamedplus"
