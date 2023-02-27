@@ -21,6 +21,7 @@ dap.configurations.cpp = {
 dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
 
+-- dap ui
 require("dapui").setup()
 
 dap.listeners.after.event_initialized["dapui_config"] = function()
@@ -32,3 +33,6 @@ end
 dap.listeners.before.event_exited["dapui_config"] = function()
 	dapui.close()
 end
+
+-- dap-virtual-text
+require("nvim-dap-virtual-text").setup()
