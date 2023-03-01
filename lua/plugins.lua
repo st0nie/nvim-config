@@ -141,9 +141,9 @@ return require("packer").startup(function()
 	})
 	use({
 		"Shatur/neovim-session-manager",
-		config = function ()
-			require('plugconf.session')
-		end
+		config = function()
+			require("plugconf.session")
+		end,
 	})
 	use({
 		"nvim-tree/nvim-tree.lua",
@@ -153,6 +153,12 @@ return require("packer").startup(function()
 		tag = "nightly", -- optional, updated every week. (see issue #1193)
 		config = function()
 			require("plugconf.tree")
+		end,
+	})
+	use({
+		"numTostr/Comment.nvim",
+		config = function()
+			require("Comment").setup()
 		end,
 	})
 end)
