@@ -83,7 +83,17 @@ return require("packer").startup(function()
 			require("plugconf.runner")
 		end,
 	})
-	use("glepnir/lspsaga.nvim")
+	use({
+		"glepnir/lspsaga.nvim",
+		branch = "main",
+		config = function()
+			require("lspsaga").setup({})
+		end,
+		requires = {
+			{ "nvim-tree/nvim-web-devicons" },
+			{ "nvim-treesitter/nvim-treesitter" },
+		},
+	})
 	use({
 		"akinsho/toggleterm.nvim",
 		tag = "*",
