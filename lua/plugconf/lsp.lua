@@ -5,3 +5,11 @@ for i = 1, #servers do
 		capabilities = capabilities,
 	})
 end
+
+-- lsp saga
+require("lspsaga").setup({
+	symbol_in_winbar = {
+		enable = true,
+		separator = " > ",
+	},
+})
