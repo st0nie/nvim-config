@@ -1,5 +1,6 @@
 require("code_runner").setup({
 	-- put here the commands by filetype
+	mode = "toggleterm",
 	filetype = {
 		python = "python3 -u",
 		c = "cd $dir && clang $fileName -o $fileNameWithoutExt && $dir/$fileNameWithoutExt",
