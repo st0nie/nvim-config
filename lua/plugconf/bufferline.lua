@@ -5,6 +5,7 @@ require("bufferline").setup({
 			{
 				filetype = "NvimTree",
 				text = "File Explorer",
+				separator = true,
 				highlight = "Directory",
 			},
 		},
