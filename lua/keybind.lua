@@ -18,7 +18,7 @@ keymap("n", "<leader>sl", "<cmd>source ~/.vim_recently_session<CR>", { silent = 
 keymap("n", "<leader>m", "<cmd>MarkdownPreview<CR>", { silent = true })
 
 -- outline
-keymap("n", "<leader>o", "<cmd>SymbolsOutline<CR>", { silent = true })
+-- keymap("n", "<leader>o", "<cmd>SymbolsOutline<CR>", { silent = true })
 
 -- buffers
 keymap("n", "<leader>bf", ":ls <Cr>:b<Space>", { silent = false })
