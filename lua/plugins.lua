@@ -95,11 +95,20 @@ return require("packer").startup(function()
 		"akinsho/toggleterm.nvim",
 		tag = "*",
 		config = function()
-			require("toggleterm").setup()
+			require("toggleterm").setup({
+				open_mapping = "<c-\\>",
+			})
 		end,
 	})
 	use({
 		"sbdchd/neoformat",
+		config = function()
+			vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+				callback = function()
+					vim.cmd("undojoin | Neoformat")
+				end,
+			})
+		end,
 	})
 	use({
 		"simrat39/symbols-outline.nvim",

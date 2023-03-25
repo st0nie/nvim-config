@@ -8,8 +8,7 @@ vim.cmd("cnoreabbrev w!! SudaWrite")
 -- terminal
 keymap("n", "<leader>t", "<cmd>ToggleTerm<CR>", { silent = true })
 keymap("t", "<esc>", "<c-\\><c-n>", { silent = true })
-keymap("t", "<c-\\>", "<c-\\><c-n>:ToggleTerm <CR>", { silent = true })
-keymap("n", "<c-\\>", ":ToggleTerm <CR>", { silent = true })
+keymap("t", "<c-w>", "<c-\\><c-n><c-w>", { silent = true })
 
 -- session
 keymap("n", "<leader>ss", "<cmd>mksession! ~/.vim_recently_session<CR>", { silent = true })
