@@ -23,7 +23,7 @@ vim.o.relativenumber = true
 
 -- cursorline
 vim.o.cursorline = true
-vim.o.cursorcolumn = true
+-- vim.o.cursorcolumn = true
 
 -- indent
 vim.o.shiftwidth = 4
