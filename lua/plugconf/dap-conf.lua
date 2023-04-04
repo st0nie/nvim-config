@@ -10,7 +10,12 @@ dap.configurations.cpp = {
 		type = "lldb",
 		request = "launch",
 		program = function()
-			return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+			local path = vim.fn.getcwd() .. "/"
+			local exe = vim.fn.expand("%:p:r")
+			if vim.fn.empty(vim.fn.glob(exe)) == 0 then
+				path = exe
+			end
+			return vim.fn.input("Path to executable: ", path, "file")
 		end,
 		cwd = "${workspaceFolder}",
 		stopOnEntry = false,
