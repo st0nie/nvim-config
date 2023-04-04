@@ -25,9 +25,9 @@ return require("packer").startup(function()
 		requires = "L3MON4D3/LuaSnip",
 	})
 	use({
-		"sainnhe/sonokai",
+		"folke/tokyonight.nvim",
 		config = function()
-			vim.cmd("colorscheme sonokai")
+			vim.cmd("colorscheme tokyonight")
 		end,
 	})
 	use({
