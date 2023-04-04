@@ -161,6 +161,7 @@ return require("packer").startup(function()
 	use({ "nvim-telescope/telescope-ui-select.nvim" })
 	use({
 		"rcarriga/nvim-dap-ui",
+		tag= "v3.6.4",
 		requires = { "mfussenegger/nvim-dap" },
 		config = function()
 			require("plugconf/dap-conf")
