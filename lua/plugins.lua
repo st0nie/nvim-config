@@ -116,8 +116,25 @@ return require("packer").startup(function()
 		"sbdchd/neoformat",
 		config = function()
 			vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-				pattern = "!zsh",
 				callback = function()
+					local exclude_type = { "zsh" }
+					local exclude_name = {}
+					local exclude_ext = {}
+					for i = 1, #exclude_type do
+						if vim.bo.filetype == exclude_type[i] then
+							return nil
+						end
+					end
+					for i = 1, #exclude_name do
+						if vim.fn.expand("%:t") == exclude_name[i] then
+							return nil
+						end
+					end
+					for i = 1, #exclude_ext do
+						if vim.fn.expand("%:e") == exclude_ext[i] then
+							return nil
+						end
+					end
 					vim.cmd("undojoin | Neoformat")
 				end,
 			})
@@ -208,5 +225,11 @@ return require("packer").startup(function()
 			require("neodev").setup()
 		end,
 		before = "nvim-lspconfig",
+	})
+	use({
+		"folke/which-key.nvim",
+		config = function()
+			require("keybind")
+		end,
 	})
 end)

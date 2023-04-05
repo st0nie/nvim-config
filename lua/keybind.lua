@@ -1,117 +1,232 @@
-local keymap = vim.keymap.set
-
 vim.g.mapleader = " "
--- force save
-keymap("n", "<leader>fw", "<cmd>SudaWrite<CR>", { silent = false })
-keymap("n", "<leader>fu", "<cmd>SudaRead<CR>", { silent = false })
 vim.cmd("cnoreabbrev w!! SudaWrite")
+local wk = require("which-key")
 
--- terminal
-keymap("n", "<leader>t", "<cmd>ToggleTerm<CR>", { silent = true })
-keymap("t", "<esc>", "<c-\\><c-n>", { silent = true })
-keymap("t", "<c-w>", "<c-\\><c-n><c-w>", { silent = true })
+vim.g.WK_shown = false
 
--- session
-keymap("n", "<leader>ss", "<cmd>mksession! ~/.vim_recently_session<CR>", { silent = true })
-keymap("n", "<leader>sl", "<cmd>source ~/.vim_recently_session<CR>", { silent = true })
+wk.setup({
+	key_labels = { ["<leader>"] = "SPC" },
+})
 
--- markdown preview
-keymap("n", "<leader>m", "<cmd>MarkdownPreview<CR>", { silent = true })
+local function wk_alias(keys)
+	local timeout = vim.o.timeoutlen
+	if vim.g.WK_shown then
+		vim.o.timeoutlen = 0
+	end
+	local key_codes = vim.api.nvim_replace_termcodes(keys, true, false, true)
+	vim.api.nvim_feedkeys(key_codes, "m", false)
+	local timer = vim.loop.new_timer()
+	if timer == nil then
+		return nil
+	end
+	timer:start(
+		5,
+		0,
+		vim.schedule_wrap(function()
+			vim.o.timeoutlen = timeout
+			vim.g.WK_shown = false
+		end)
+	)
+end
 
--- outline
--- keymap("n", "<leader>o", "<cmd>SymbolsOutline<CR>", { silent = true })
+wk.register({
+	mode = "n",
+	["<c-\\>"] = {
+		"Toggle Terminal",
+	},
+	["<leader>"] = {
+		w = {
+			function()
+				wk_alias("<c-w>")
+			end,
+			"+window",
+			name = "",
+		},
+		h = { "<cmd>WhichKey<cr>", "show keybinds" },
+		f = {
+			name = "files",
+			w = { "<cmd>SudaWrite<cr>", "Force Write" },
+			u = { "<cmd>SudaRead<cr>", "Force Read" },
+			f = { "<cmd>Telescope find_files<cr>", "Find File" },
+			g = { "<cmd>Telescope live_grep<cr>", "Find LiveGrep" },
+			b = { "<cmd>Telescope buffers<cr>", "Find Buffers" },
+			h = { "<cmd>Telescope help_tags<cr>", "Find Helps" },
+		},
+		t = { "<cmd>ToggleTerm<cr>", "toggle terminal" },
+		m = { "<cmd>MarkdownPreview<cr>", "markdown preview" },
+		b = {
+			name = "buffers",
+			f = { "<cmd>Telescope find_files<cr>", "Find Buffers" },
+			d = { "<cmd>bdelete<cr>", "Delete Buffer" },
+			["["] = { "<cmd>bprevious<cr>", "Previous Buffer" },
+			["p"] = { "<cmd>bprevious<cr>", "Previous Buffer" },
+			["]"] = { "<cmd>bnext<cr>", "Next Buffer" },
+			["n"] = { "<cmd>bnext<cr>", "Next Buffer" },
+		},
+		r = {
+			name = "code_runner",
+			r = { "<cmd>RunCode<cr>", "Run Code" },
+			f = { "<cmd>RunFile<cr>", "Run File" },
+			t = { "<cmd>RunFile tab<cr>", "Run File(Tab)" },
+			p = { "<cmd>RunProject<cr>", "Run Project" },
+			c = { "<cmd>RunClose<cr>", "Run Close" },
+		},
+		crf = { "<cmd>CRFiletype<cr>", "Edit Runner Filetype Config" },
+		crp = { "<cmd>CRProjects<cr>", "Edit Runner Projects Config" },
+		ca = { "<cmd>Lspsaga code_action<CR>", "Code Action", mode = { "n", "v" } },
+		cd = { "<cmd>Lspsaga show_cursor_diagnostics<CR>", "Show Cursor Diagnostics" },
+		ci = { "<cmd>Lspsaga incoming_calls<CR>", "lsp Incoming calls" },
+		co = { "<cmd>Lspsaga outgoing_calls<CR>", "lsp Outgoing calls" },
+		lp = {
+			function()
+				require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
+			end,
+			"Dap Set Breakpoint(Log)",
+		},
+		n = {
+			name = "nvim_tree",
+			t = { "<cmd>NvimTreeToggle<cr>", "Toggle nvim-tree" },
+			s = { "<cmd>NvimTreeFocus<cr>", "Switch to nvim-tree" },
+			f = { "<cmd>NvimTreeFindFile<cr>", "Find Buffer in nvim-tree" },
+			c = { "<cmd>NvimTreeCollapse<cr>", "Fold nvim_tree" },
+		},
+		d = {
+			name = "debug",
+			b = {
+				function()
+					require("dap").toggle_breakpoint()
+				end,
+				"Dap Toggle Breakpoint",
+			},
+			B = {
+				function()
+					require("dap").set_breakpoint()
+				end,
+				"Dap Set Breakpoint",
+			},
+			r = {
+				function()
+					require("dap").repl.open()
+				end,
+				"Dap repl Open",
+			},
+			l = {
+				function()
+					require("dap").run_last()
+				end,
+				"Dap Last Run",
+			},
+			h = {
+				function()
+					require("dap.ui.widgets").hover()
+				end,
+				"Dap-UI Hover",
+			},
+			p = {
+				function()
+					require("dap.ui.widgets").preview()
+				end,
+				"Dap-UI Preview",
+			},
+			f = {
+				function()
+					local widgets = require("dap.ui.widgets")
+					widgets.centered_float(widgets.frames)
+				end,
+				"Dap-UI Frames",
+			},
+			s = {
+				function()
+					local widgets = require("dap.ui.widgets")
+					widgets.centered_float(widgets.scopes)
+				end,
+				"Dap Last Run",
+			},
+		},
+	},
+	["<F17>"] = {
+		function()
+			require("dap").continue()
+		end,
+		"Dap Continue",
+	},
+	["<F10>"] = {
+		function()
+			require("dap").step_over()
+		end,
+		"Dap Step Over",
+	},
+	["<F11>"] = {
+		function()
+			require("dap").step_into()
+		end,
+		"Dap Step Into",
+	},
+	["<F12>"] = {
+		function()
+			require("dap").step_out()
+		end,
+		"Dap Step Out",
+	},
 
--- buffers
-keymap("n", "<leader>bf", ":ls <Cr>:b<Space>", { silent = false })
-keymap("n", "<leader>bd", "<cmd>bdelete<CR>", { silent = true })
-keymap("n", "[b", "<cmd>bprevious<CR>", { silent = true })
-keymap("n", "]b", "<cmd>bnext<CR>", { silent = true })
-keymap("n", "<leader>b[", "<cmd>bprevious<CR>", { silent = true })
-keymap("n", "<leader>b]", "<cmd>bnext<CR>", { silent = true })
-keymap("n", "<leader>bn", "<cmd>bprevious<CR>", { silent = true })
-keymap("n", "<leader>bp", "<cmd>bnext<CR>", { silent = true })
+	gh = { "<cmd>Lspsaga lsp_finder<CR>", "lsp Finder" },
+	gr = { "<cmd>Lspsaga rename<CR>", "lsp Rename" },
+	gd = { "<cmd>Lspsaga goto_definition<CR>", "lsp Goto_Definition" },
+	gp = { "<cmd>Lspsaga peek_definition<CR>", "lsp Peek_Definition" },
+	gt = { "<cmd>Lspsaga goto_type_definition<CR>", "lsp Type_Definition" },
+	sl = { "<cmd>Lspsaga show_line_diagnostics<CR>", "lsp Show_Line_Diagnostics" },
+	sb = { "<cmd>Lspsaga show_buf_diagnostics<CR>", "lsp Show_Buffer_Diagnostics" },
+	sw = { "<cmd>Lspsaga show_workspace_diagnostics<CR>", "lsp Show_Workspace_Diagnostics" },
+	sc = { "<cmd>Lspsaga show_cursor_diagnostics<CR>", "lsp Show_Cursor_Diagnostics" },
 
--- format
-keymap("n", "<F4>", "<cmd>Neoformat<CR>", { silent = true })
+	K = { "<cmd>Lspsaga hover_doc<CR>", "lsp Hover Doc" },
+	["]e"] = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "Next Diagnostic" },
+	["]E"] = {
+		function()
+			require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
+		end,
+		"Next Error",
+	},
+	["[e"] = { "<cmd>Lspsaga diagnostic_jump_prev<cr>", "Previous Diagnostic" },
+	["[E"] = {
+		function()
+			require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })
+		end,
+		"Previous Error",
+	},
+	["]b"] = { "<cmd>bnext<cr>", "Next Buffer" },
+	["[b"] = { "<cmd>bprevious<cr>", "Previous Buffer" },
+	["<F4>"] = { "<cmd>Neoformat<cr>", "Format Buffer" },
+	["<F5>"] = { "<cmd>RunCode<cr>", "Run Code" },
+	["<C-C>"] = { "Send <C-C> to the terminal" },
+})
 
--- code_runner
-keymap("n", "<F5>", ":RunCode<CR>", { silent = true })
-keymap("n", "<leader>r", ":RunCode<CR>", { silent = true })
-keymap("n", "<leader>rf", ":RunFile<CR>", { silent = true })
-keymap("n", "<leader>rft", ":RunFile tab<CR>", { silent = true })
-keymap("n", "<leader>rp", ":RunProject<CR>", { silent = true })
-keymap("n", "<leader>rc", ":RunClose<CR>", { silent = true })
-keymap("n", "<leader>crf", ":CRFiletype<CR>", { silent = true })
-keymap("n", "<leader>crp", ":CRProjects<CR>", { silent = true })
+local function termcodes(str)
+	return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
 
--- nvim_tree
-keymap("n", "<leader>n", ":NvimTreeToggle<CR>", { silent = true })
-keymap("n", "<leader>nf", ":NvimTreeFocus<CR>", { silent = true })
-keymap("n", "<leader>nff", ":NvimTreeFindFile<CR>", { silent = true })
-keymap("n", "<leader>nc", ":NvimTreeCollapse<CR>", { silent = true })
+local exit_term_key = "<c-c>"
 
--- Lspsaga
-keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
-keymap({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>", { silent = true })
-keymap("n", "gr", "<cmd>Lspsaga rename<CR>", { silent = true })
-keymap("n", "gd", "<cmd>Lspsaga peek_definition<CR>", { silent = true })
-keymap("n", "<leader>cd", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { silent = true })
-keymap("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { silent = true })
-keymap("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", { silent = true })
-keymap("n", "[E", function()
-	require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })
-end, { silent = true })
-keymap("n", "]E", function()
-	require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
-end, { silent = true })
-keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
+wk.register({
+	[exit_term_key] = { termcodes("<C-\\><C-N>"), "escape terminal mode" },
+}, { mode = "t" })
+vim.api.nvim_set_keymap("t", "<c-w>", exit_term_key .. "<c-w>", { silent = true })
 
--- telescope
-local builtin = require("telescope.builtin")
-keymap("n", "<leader>ff", builtin.find_files, { silent = true })
-keymap("n", "<leader>fg", builtin.live_grep, { silent = true })
-keymap("n", "<leader>fb", builtin.buffers, { silent = true })
-keymap("n", "<leader>fh", builtin.help_tags, { silent = true })
+function _G.set_terminal_keymaps()
+	local opts = { buffer = 0 }
+	vim.keymap.set("n", exit_term_key, "i" .. exit_term_key, opts)
+end
 
--- dap
-keymap("n", "<F17>", function() -- Shift+F5
-	require("dap").continue()
-end)
-keymap("n", "<F10>", function()
-	require("dap").step_over()
-end)
-keymap("n", "<F11>", function()
-	require("dap").step_into()
-end)
-keymap("n", "<F12>", function()
-	require("dap").step_out()
-end)
-keymap("n", "<Leader>db", function()
-	require("dap").toggle_breakpoint()
-end)
-keymap("n", "<Leader>dB", function()
-	require("dap").set_breakpoint()
-end)
-keymap("n", "<Leader>lp", function()
-	require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
-end)
-keymap("n", "<Leader>dr", function()
-	require("dap").repl.open()
-end)
-keymap("n", "<Leader>dl", function()
-	require("dap").run_last()
-end)
-keymap({ "n", "v" }, "<Leader>dh", function()
-	require("dap.ui.widgets").hover()
-end)
-keymap({ "n", "v" }, "<Leader>dp", function()
-	require("dap.ui.widgets").preview()
-end)
-keymap("n", "<Leader>df", function()
-	local widgets = require("dap.ui.widgets")
-	widgets.centered_float(widgets.frames)
-end)
-keymap("n", "<Leader>ds", function()
-	local widgets = require("dap.ui.widgets")
-	widgets.centered_float(widgets.scopes)
-end)
+vim.api.nvim_create_autocmd({ "TermOpen" }, {
+	pattern = "term://*",
+	callback = function()
+		set_terminal_keymaps()
+	end,
+})
+
+vim.api.nvim_create_autocmd({ "Filetype" }, {
+	pattern = "WhichKey",
+	callback = function()
+		vim.g.WK_shown = true
+	end,
+})
