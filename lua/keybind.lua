@@ -3,6 +3,7 @@ local keymap = vim.keymap.set
 vim.g.mapleader = " "
 -- force save
 keymap("n", "<leader>fw", "<cmd>SudaWrite<CR>", { silent = false })
+keymap("n", "<leader>fu", "<cmd>SudaRead<CR>", { silent = false })
 vim.cmd("cnoreabbrev w!! SudaWrite")
 
 -- terminal

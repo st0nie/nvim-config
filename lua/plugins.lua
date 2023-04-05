@@ -19,6 +19,7 @@ return require("packer").startup(function()
 	use({ "hrsh7th/cmp-nvim-lsp-signature-help", requires = "hrsh7th/nvim-cmp" })
 	use({ "hrsh7th/cmp-buffer", requires = "hrsh7th/nvim-cmp" })
 	use({ "hrsh7th/cmp-path", requires = "hrsh7th/nvim-cmp" })
+	use({ "petertriho/cmp-git", requires = { "hrsh7th/nvim-cmp", "nvim-lua/plenary.nvim" } })
 	use({ "hrsh7th/cmp-cmdline", requires = "hrsh7th/nvim-cmp" })
 	use({
 		"saadparwaiz1/cmp_luasnip",
@@ -68,6 +69,7 @@ return require("packer").startup(function()
 
 	use({
 		"p00f/nvim-ts-rainbow",
+		before = "nvim-treesitter",
 		requires = "nvim-treesitter/nvim-treesitter",
 	})
 	use({
@@ -161,7 +163,7 @@ return require("packer").startup(function()
 	use({ "nvim-telescope/telescope-ui-select.nvim" })
 	use({
 		"rcarriga/nvim-dap-ui",
-		tag= "v3.6.4",
+		tag = "v3.6.4",
 		requires = { "mfussenegger/nvim-dap" },
 		config = function()
 			require("plugconf/dap-conf")
@@ -199,5 +201,12 @@ return require("packer").startup(function()
 		config = function()
 			require("Comment").setup()
 		end,
+	})
+	use({
+		"folke/neodev.nvim",
+		config = function()
+			require("neodev").setup()
+		end,
+		before = "nvim-lspconfig",
 	})
 end)

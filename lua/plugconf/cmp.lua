@@ -93,6 +93,7 @@ cmp.setup({
 		{ name = "nvim_lsp_signature_help" },
 		{ name = "luasnip" },
 	}, {
+		{ name = "path" },
 		{ name = "buffer" },
 	}),
 	experimental = {
@@ -102,7 +103,7 @@ cmp.setup({
 
 cmp.setup.filetype("gitcommit", {
 	sources = cmp.config.sources({
-		{ name = "cmp_git" },
+		{ name = "git" },
 	}, {
 		{ name = "buffer" },
 	}),
@@ -129,3 +130,5 @@ cmp.setup.cmdline(":", {
 		{ name = "cmdline" },
 	}),
 })
+
+require("cmp_git").setup()
