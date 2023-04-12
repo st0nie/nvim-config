@@ -19,6 +19,7 @@ require("lazy").setup({
 	{ "folke/neoconf.nvim", cmd = "Neoconf" },
 	{
 		"neovim/nvim-lspconfig",
+		event = "BufEnter",
 		config = function()
 			require("lsp")
 		end,
@@ -62,14 +63,14 @@ require("lazy").setup({
 	},
 	{
 		"norcalli/nvim-colorizer.lua",
-		event = "VeryLazy",
+		event = "BufEnter",
 		config = function()
 			require("colorizer").setup()
 		end,
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
-		event = "VeryLazy",
+		event = "BufEnter",
 		build = function()
 			require("nvim-treesitter.install").update({ with_sync = true })
 		end,
@@ -80,13 +81,14 @@ require("lazy").setup({
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		event = "VeryLazy",
+		event = "BufEnter",
 		config = function()
 			require("plugconf.blankline")
 		end,
 	},
 	{
 		"CRAG666/code_runner.nvim",
+		event = "BufEnter",
 		dependencies = "nvim-lua/plenary.nvim",
 		config = function()
 			require("plugconf.runner")
@@ -95,14 +97,23 @@ require("lazy").setup({
 	{
 		"glepnir/lspsaga.nvim",
 		branch = "main",
+		event = "BufEnter",
 		dependencies = {
 			{ "nvim-tree/nvim-web-devicons" },
 			{ "nvim-treesitter/nvim-treesitter" },
 		},
+		config = function()
+			require("lspsaga").setup({
+				symbol_in_winbar = {
+					enable = true,
+					separator = " > ",
+				},
+			})
+		end,
 	},
 	{
 		"akinsho/toggleterm.nvim",
-		tag = "*",
+		event = "VeryLazy",
 		config = function()
 			require("toggleterm").setup({
 				open_mapping = "<c-\\>",
@@ -110,6 +121,7 @@ require("lazy").setup({
 					local nvimtree = require("nvim-tree")
 					local nvimtree_view = require("nvim-tree.view")
 					if nvimtree_view.is_visible() and terminal.direction == "horizontal" then
+						---@diagnostic disable-next-line: param-type-mismatch
 						local nvimtree_width = vim.fn.winwidth(nvimtree_view.get_winnr())
 						nvimtree.toggle()
 						nvimtree_view.View.width = nvimtree_width
@@ -121,6 +133,7 @@ require("lazy").setup({
 	},
 	{
 		"sbdchd/neoformat",
+		event = "BufEnter",
 		config = function()
 			vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 				callback = function()
@@ -149,21 +162,24 @@ require("lazy").setup({
 	},
 	{
 		"iamcco/markdown-preview.nvim",
+		ft = "markdown",
 		build = function()
 			vim.fn["mkdp#util#install"]()
 		end,
 	},
 	{
 		"lewis6991/gitsigns.nvim",
+		event = "BufEnter",
 		config = function()
 			require("gitsigns").setup({
 				current_line_blame = true,
 			})
 		end,
 	},
-	{ "lambdalisue/suda.vim" },
+	{ "lambdalisue/suda.vim", event = "VeryLazy" },
 	{
 		"nvim-telescope/telescope.nvim",
+		event = "VeryLazy",
 		tag = "0.1.1",
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-ui-select.nvim" },
 		config = function()
@@ -179,6 +195,7 @@ require("lazy").setup({
 	},
 	{
 		"rcarriga/nvim-dap-ui",
+		event = "BufEnter",
 		dependencies = { "mfussenegger/nvim-dap", "theHamsta/nvim-dap-virtual-text" },
 		config = function()
 			require("plugconf/dap-conf")
@@ -199,6 +216,7 @@ require("lazy").setup({
 	},
 	{
 		"nvim-tree/nvim-tree.lua",
+		event = "VeryLazy",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons", -- optional, for file icons
 		},
@@ -209,6 +227,7 @@ require("lazy").setup({
 	},
 	{
 		"numTostr/Comment.nvim",
+		event = "BufEnter",
 		config = function()
 			require("Comment").setup()
 		end,
