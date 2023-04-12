@@ -1,99 +1,106 @@
-vim.cmd([[packadd packer.nvim]])
-
-return require("packer").startup(function()
-	use("wbthomason/packer.nvim")
-	use({
+require("lazy").setup({
+	{
+		"folke/tokyonight.nvim",
+		lazy = false, -- make sure we load this during startup if it is your main colorscheme
+		priority = 1000, -- make sure to load this before all the other start plugins
+		config = function()
+			-- load the colorscheme here
+			vim.cmd([[colorscheme tokyonight]])
+		end,
+	},
+	"folke/neodev.nvim",
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("keybind")
+		end,
+	},
+	{ "folke/neoconf.nvim", cmd = "Neoconf" },
+	{
 		"neovim/nvim-lspconfig",
 		config = function()
-			require("plugconf.lsp")
+			require("lsp")
 		end,
-	})
-	use({
+	},
+	{
 		"hrsh7th/nvim-cmp",
-		after = { "nvim-autopairs" },
-		config = function()
-			require("plugconf.cmp")
-		end,
-	})
-	use({ "hrsh7th/cmp-nvim-lsp", requires = "hrsh7th/nvim-cmp" })
-	use({ "hrsh7th/cmp-nvim-lsp-signature-help", requires = "hrsh7th/nvim-cmp" })
-	use({ "hrsh7th/cmp-buffer", requires = "hrsh7th/nvim-cmp" })
-	use({ "hrsh7th/cmp-path", requires = "hrsh7th/nvim-cmp" })
-	use({ "petertriho/cmp-git", requires = { "hrsh7th/nvim-cmp", "nvim-lua/plenary.nvim" } })
-	use({ "hrsh7th/cmp-cmdline", requires = "hrsh7th/nvim-cmp" })
-	use({
-		"saadparwaiz1/cmp_luasnip",
-		requires = "L3MON4D3/LuaSnip",
-	})
-	use({
-		"folke/tokyonight.nvim",
-		config = function()
-			vim.cmd("colorscheme tokyonight")
-		end,
-	})
-	use({
-		"windwp/nvim-autopairs",
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-nvim-lsp-signature-help",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"petertriho/cmp-git",
+			"hrsh7th/cmp-cmdline",
+			"saadparwaiz1/cmp_luasnip",
+			"L3MON4D3/LuaSnip",
+			"windwp/nvim-autopairs",
+			"onsails/lspkind.nvim",
+			"nvim-lua/plenary.nvim",
+		},
 		config = function()
 			require("nvim-autopairs").setup({})
+			require("plugconf/cmp")
 		end,
-	})
-	use({
+	},
+	{ "nvim-tree/nvim-web-devicons", lazy = true },
+	{ "stevearc/dressing.nvim", event = "VeryLazy" },
+	{
 		"nvim-lualine/lualine.nvim",
-		requires = "kyazdani42/nvim-web-devicons",
+		event = "VeryLazy",
 		config = function()
 			require("plugconf.lualine")
 		end,
-	})
-	use({
+	},
+	{
 		"akinsho/bufferline.nvim",
-		requires = "kyazdani42/nvim-web-devicons",
+		event = "VeryLazy",
+		dependencies = "nvim-tree/nvim-web-devicons",
 		config = function()
 			require("plugconf.bufferline")
 		end,
-	})
-	use({
+	},
+	{
 		"norcalli/nvim-colorizer.lua",
+		event = "VeryLazy",
 		config = function()
 			require("colorizer").setup()
 		end,
-	})
-	use({
+	},
+	{
 		"nvim-treesitter/nvim-treesitter",
-		run = function()
+		event = "VeryLazy",
+		build = function()
 			require("nvim-treesitter.install").update({ with_sync = true })
 		end,
 		config = function()
 			require("plugconf.ts")
 		end,
-	})
-
-	use({
-		"p00f/nvim-ts-rainbow",
-		before = "nvim-treesitter",
-		requires = "nvim-treesitter/nvim-treesitter",
-	})
-	use({
+		dependencies = "p00f/nvim-ts-rainbow",
+	},
+	{
 		"lukas-reineke/indent-blankline.nvim",
+		event = "VeryLazy",
 		config = function()
 			require("plugconf.blankline")
 		end,
-	})
-	use({
+	},
+	{
 		"CRAG666/code_runner.nvim",
-		requires = "nvim-lua/plenary.nvim",
+		dependencies = "nvim-lua/plenary.nvim",
 		config = function()
 			require("plugconf.runner")
 		end,
-	})
-	use({
+	},
+	{
 		"glepnir/lspsaga.nvim",
 		branch = "main",
-		requires = {
+		dependencies = {
 			{ "nvim-tree/nvim-web-devicons" },
 			{ "nvim-treesitter/nvim-treesitter" },
 		},
-	})
-	use({
+	},
+	{
 		"akinsho/toggleterm.nvim",
 		tag = "*",
 		config = function()
@@ -111,8 +118,8 @@ return require("packer").startup(function()
 				end,
 			})
 		end,
-	})
-	use({
+	},
+	{
 		"sbdchd/neoformat",
 		config = function()
 			vim.api.nvim_create_autocmd({ "BufWritePre" }, {
@@ -139,33 +146,26 @@ return require("packer").startup(function()
 				end,
 			})
 		end,
-	})
-	-- use({
-	-- 	"simrat39/symbols-outline.nvim",
-	-- 	config = function()
-	-- 		require("symbols-outline").setup()
-	-- 	end,
-	-- })
-	use({
+	},
+	{
 		"iamcco/markdown-preview.nvim",
-		run = function()
+		build = function()
 			vim.fn["mkdp#util#install"]()
 		end,
-	})
-	use({ "onsails/lspkind.nvim" })
-	use({
+	},
+	{
 		"lewis6991/gitsigns.nvim",
 		config = function()
 			require("gitsigns").setup({
 				current_line_blame = true,
 			})
 		end,
-	})
-	use({ "lambdalisue/suda.vim" })
-	use({
+	},
+	{ "lambdalisue/suda.vim" },
+	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.1",
-		requires = { { "nvim-lua/plenary.nvim" } },
+		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-ui-select.nvim" },
 		config = function()
 			require("telescope").setup({
 				extensions = {
@@ -176,60 +176,41 @@ return require("packer").startup(function()
 			})
 			require("telescope").load_extension("ui-select")
 		end,
-	})
-	use({ "nvim-telescope/telescope-ui-select.nvim" })
-	use({
+	},
+	{
 		"rcarriga/nvim-dap-ui",
-		tag = "v3.6.4",
-		requires = { "mfussenegger/nvim-dap" },
+		dependencies = { "mfussenegger/nvim-dap", "theHamsta/nvim-dap-virtual-text" },
 		config = function()
 			require("plugconf/dap-conf")
 		end,
-	})
-	use({
-		"theHamsta/nvim-dap-virtual-text",
-		before = "rcarriga/nvim-dap-ui",
-	})
-	use({
+	},
+	{
 		"goolord/alpha-nvim",
-		requires = { "nvim-tree/nvim-web-devicons" },
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			require("alpha").setup(require("alpha.themes.startify").config)
 		end,
-	})
-	use({
+	},
+	{
 		"Shatur/neovim-session-manager",
 		config = function()
 			require("plugconf.session")
 		end,
-	})
-	use({
+	},
+	{
 		"nvim-tree/nvim-tree.lua",
-		requires = {
+		dependencies = {
 			"nvim-tree/nvim-web-devicons", -- optional, for file icons
 		},
 		tag = "nightly", -- optional, updated every week. (see issue #1193)
 		config = function()
 			require("plugconf.tree")
 		end,
-	})
-	use({
+	},
+	{
 		"numTostr/Comment.nvim",
 		config = function()
 			require("Comment").setup()
 		end,
-	})
-	use({
-		"folke/neodev.nvim",
-		config = function()
-			require("neodev").setup()
-		end,
-		before = "nvim-lspconfig",
-	})
-	use({
-		"folke/which-key.nvim",
-		config = function()
-			require("keybind")
-		end,
-	})
-end)
+	},
+})

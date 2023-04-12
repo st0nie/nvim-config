@@ -1,5 +1,6 @@
 vim.g.mapleader = " "
 vim.cmd("cnoreabbrev w!! SudaWrite")
+
 local wk = require("which-key")
 
 vim.g.WK_shown = false
