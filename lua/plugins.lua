@@ -19,13 +19,15 @@ require("lazy").setup({
 	{ "folke/neoconf.nvim", cmd = "Neoconf" },
 	{
 		"neovim/nvim-lspconfig",
-		event = "BufEnter",
+		event = { "BufReadPre", "BufNewFile" },
+		lazy = true,
 		config = function()
 			require("lsp")
 		end,
 	},
 	{
 		"hrsh7th/nvim-cmp",
+		event = "VeryLazy",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
@@ -38,6 +40,7 @@ require("lazy").setup({
 			"windwp/nvim-autopairs",
 			"onsails/lspkind.nvim",
 			"nvim-lua/plenary.nvim",
+			"neovim/nvim-lspconfig",
 		},
 		config = function()
 			require("nvim-autopairs").setup({})
@@ -63,14 +66,14 @@ require("lazy").setup({
 	},
 	{
 		"norcalli/nvim-colorizer.lua",
-		event = "BufEnter",
+		event = "VeryLazy",
 		config = function()
 			require("colorizer").setup()
 		end,
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
-		event = "BufEnter",
+		event = "VeryLazy",
 		build = function()
 			require("nvim-treesitter.install").update({ with_sync = true })
 		end,
@@ -88,7 +91,7 @@ require("lazy").setup({
 	},
 	{
 		"CRAG666/code_runner.nvim",
-		event = "BufEnter",
+		event = "VeryLazy",
 		dependencies = "nvim-lua/plenary.nvim",
 		config = function()
 			require("plugconf.runner")
@@ -97,7 +100,7 @@ require("lazy").setup({
 	{
 		"glepnir/lspsaga.nvim",
 		branch = "main",
-		event = "BufEnter",
+		event = "VeryLazy",
 		dependencies = {
 			{ "nvim-tree/nvim-web-devicons" },
 			{ "nvim-treesitter/nvim-treesitter" },
@@ -133,7 +136,7 @@ require("lazy").setup({
 	},
 	{
 		"sbdchd/neoformat",
-		event = "BufEnter",
+		event = "VeryLazy",
 		config = function()
 			vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 				callback = function()
@@ -169,7 +172,7 @@ require("lazy").setup({
 	},
 	{
 		"lewis6991/gitsigns.nvim",
-		event = "BufEnter",
+		event = "VeryLazy",
 		config = function()
 			require("gitsigns").setup({
 				current_line_blame = true,
@@ -179,8 +182,8 @@ require("lazy").setup({
 	{ "lambdalisue/suda.vim", event = "VeryLazy" },
 	{
 		"nvim-telescope/telescope.nvim",
-		event = "VeryLazy",
 		tag = "0.1.1",
+		event = "VeryLazy",
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-ui-select.nvim" },
 		config = function()
 			require("telescope").setup({
@@ -195,7 +198,7 @@ require("lazy").setup({
 	},
 	{
 		"rcarriga/nvim-dap-ui",
-		event = "BufEnter",
+		event = "VeryLazy",
 		dependencies = { "mfussenegger/nvim-dap", "theHamsta/nvim-dap-virtual-text" },
 		config = function()
 			require("plugconf/dap-conf")
@@ -217,7 +220,7 @@ require("lazy").setup({
 	},
 	{
 		"nvim-tree/nvim-tree.lua",
-		event = "VeryLazy",
+		event = "BufEnter",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons", -- optional, for file icons
 		},
@@ -228,7 +231,7 @@ require("lazy").setup({
 	},
 	{
 		"numTostr/Comment.nvim",
-		event = "BufEnter",
+		event = "VeryLazy",
 		config = function()
 			require("Comment").setup()
 		end,
