@@ -91,6 +91,7 @@ wk.register({
 			f = { "<cmd>NvimTreeFindFile<cr>", "Find Buffer in nvim-tree" },
 			c = { "<cmd>NvimTreeCollapse<cr>", "Fold nvim_tree" },
 		},
+		p = { "<cmd>Lazy<cr>", "plugins manager" },
 		d = {
 			name = "debug",
 			b = {
