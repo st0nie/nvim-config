@@ -108,7 +108,7 @@ require("lazy").setup({
 		config = function()
 			require("lspsaga").setup({
 				symbol_in_winbar = {
-					enable = true,
+					enable = false,
 					separator = " > ",
 				},
 			})
@@ -179,7 +179,13 @@ require("lazy").setup({
 			})
 		end,
 	},
-	{ "lambdalisue/suda.vim", event = "VeryLazy" },
+	{
+		"lambdalisue/suda.vim",
+		event = { "BufReadPre", "BufNewFile" },
+		init = function()
+			vim.g.suda_smart_edit = 1
+		end,
+	},
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.1",
@@ -234,6 +240,16 @@ require("lazy").setup({
 		event = "VeryLazy",
 		config = function()
 			require("Comment").setup()
+		end,
+	},
+	{
+		"SmiteshP/nvim-navic",
+		lazy = true,
+		dependencies = "neovim/nvim-lspconfig",
+		config = function()
+			require("nvim-navic").setup({
+				highlight = true,
+			})
 		end,
 	},
 })

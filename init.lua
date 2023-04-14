@@ -8,10 +8,6 @@ vim.g.loaded_netrwPlugin = 1
 -- tuicolor
 vim.o.termguicolors = true
 
--- neovide
-vim.o.guifont = "Hack Nerd Font:h12"
-vim.g.neovide_cursor_vfx_mode = "ripple"
-
 -- mouse
 vim.o.mouse = "a"
 
