@@ -5,13 +5,16 @@ require("lazy").setup({
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
 			-- load the colorscheme here
-			vim.cmd([[colorscheme tokyonight]])
+			vim.cmd([[colorscheme tokyonight-day]])
 		end,
 	},
 	"folke/neodev.nvim",
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
+		init = function()
+			vim.g.mapleader = " "
+		end,
 		config = function()
 			require("keybind")
 		end,
@@ -84,14 +87,19 @@ require("lazy").setup({
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		event = { "BufReadPre", "BufNewFile" },
+		event = "VeryLazy",
+		init = function()
+			vim.opt.list = true
+			vim.opt.listchars:append("eol:↴")
+		end,
 		config = function()
 			require("plugconf.blankline")
 		end,
 	},
 	{
 		"CRAG666/code_runner.nvim",
-		event = "VeryLazy",
+		cmd = { "RunCode", "RunFile", "RunProject" },
+		lazy = true,
 		dependencies = "nvim-lua/plenary.nvim",
 		config = function()
 			require("plugconf.runner")
@@ -136,8 +144,9 @@ require("lazy").setup({
 	},
 	{
 		"sbdchd/neoformat",
-		event = "VeryLazy",
-		config = function()
+		lazy = true,
+		cmd = "Neoformat",
+		init = function()
 			vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 				callback = function()
 					local exclude_type = { "zsh" }
@@ -183,6 +192,7 @@ require("lazy").setup({
 		"lambdalisue/suda.vim",
 		event = { "BufReadPre", "BufNewFile" },
 		init = function()
+			vim.cmd("cnoreabbrev w!! SudaWrite")
 			vim.g.suda_smart_edit = 1
 		end,
 	},
@@ -226,7 +236,7 @@ require("lazy").setup({
 	},
 	{
 		"nvim-tree/nvim-tree.lua",
-		event = { "BufReadPre", "BufNewFile" },
+		event = "VeryLazy",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons", -- optional, for file icons
 		},
