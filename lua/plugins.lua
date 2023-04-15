@@ -1,3 +1,10 @@
+if os.getenv("NVIM") ~= nil then
+	require("lazy").setup({
+		{ "willothy/flatten.nvim", config = true },
+	})
+	return
+end
+
 require("lazy").setup({
 	{
 		"sainnhe/sonokai",
@@ -275,5 +282,41 @@ require("lazy").setup({
 				highlight = true,
 			})
 		end,
+	},
+	{
+		"willothy/flatten.nvim",
+		opts = {
+			window = {
+				open = "alternate",
+			},
+			callbacks = {
+				should_block = function(argv)
+					return vim.tbl_contains(argv, "-b")
+				end,
+				post_open = function(bufnr, winnr, ft, is_blocking)
+					if is_blocking then
+						require("toggleterm").toggle(0)
+					else
+						vim.api.nvim_set_current_win(winnr)
+					end
+					if ft == "gitcommit" then
+						vim.api.nvim_create_autocmd("BufWritePost", {
+							buffer = bufnr,
+							once = true,
+							callback = function()
+								vim.defer_fn(function()
+									vim.api.nvim_buf_delete(bufnr, {})
+								end, 50)
+							end,
+						})
+					end
+				end,
+				block_end = function()
+					vim.defer_fn(function()
+						require("toggleterm").toggle(0)
+					end, 10)
+				end,
+			},
+		},
 	},
 })

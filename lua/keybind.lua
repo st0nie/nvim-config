@@ -54,7 +54,7 @@ wk.register({
 		m = { "<cmd>MarkdownPreview<cr>", "markdown preview" },
 		b = {
 			name = "buffers",
-			f = { "<cmd>Telescope find_files<cr>", "Find Buffers" },
+			f = { "<cmd>Telescope buffers<cr>", "Find Buffers" },
 			d = { "<cmd>bdelete<cr>", "Delete Buffer" },
 			["["] = { "<cmd>bprevious<cr>", "Previous Buffer" },
 			["p"] = { "<cmd>bprevious<cr>", "Previous Buffer" },
