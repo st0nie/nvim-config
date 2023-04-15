@@ -84,7 +84,7 @@ require("lazy").setup({
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		event = "BufEnter",
+		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			require("plugconf.blankline")
 		end,
@@ -226,11 +226,23 @@ require("lazy").setup({
 	},
 	{
 		"nvim-tree/nvim-tree.lua",
-		event = "BufEnter",
+		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			"nvim-tree/nvim-web-devicons", -- optional, for file icons
 		},
 		tag = "nightly", -- optional, updated every week. (see issue #1193)
+		init = function()
+			local function open_nvim_tree(data)
+				local directory = vim.fn.isdirectory(data.file) == 1
+				if not directory then
+					return
+				end
+				vim.cmd.cd(data.file)
+				require("nvim-tree.api").tree.open()
+			end
+
+			vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
+		end,
 		config = function()
 			require("plugconf.tree")
 		end,

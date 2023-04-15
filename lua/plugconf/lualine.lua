@@ -2,7 +2,7 @@ require("lualine").setup({
 	winbar = {
 		lualine_c = {
 			{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-			{ "filename", path = 1, separator = ":", symbols = { modified = "  ", readonly = "", unnamed = "" } },
+			{ "filename", path = 1, separator = ":" },
 			{
 				function()
 					return require("nvim-navic").get_location()
