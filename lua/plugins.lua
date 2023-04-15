@@ -193,7 +193,6 @@ require("lazy").setup({
 	},
 	{
 		"lambdalisue/suda.vim",
-		event = { "BufReadPre", "BufNewFile" },
 		init = function()
 			vim.cmd("cnoreabbrev w!! SudaWrite")
 			vim.g.suda_smart_edit = 1
