@@ -13,18 +13,10 @@ local function wk_alias(keys)
 	end
 	local key_codes = vim.api.nvim_replace_termcodes(keys, true, false, true)
 	vim.api.nvim_feedkeys(key_codes, "m", false)
-	local timer = vim.loop.new_timer()
-	if timer == nil then
-		return nil
-	end
-	timer:start(
-		5,
-		0,
-		vim.schedule_wrap(function()
-			vim.o.timeoutlen = timeout
-			vim.g.WK_shown = false
-		end)
-	)
+	vim.defer_fn(function()
+		vim.o.timeoutlen = timeout
+		vim.g.WK_shown = false
+	end, 10)
 end
 
 wk.register({
@@ -49,6 +41,9 @@ wk.register({
 			g = { "<cmd>Telescope live_grep<cr>", "Find LiveGrep" },
 			b = { "<cmd>Telescope buffers<cr>", "Find Buffers" },
 			h = { "<cmd>Telescope help_tags<cr>", "Find Helps" },
+			s = { "<cmd>Telescope lsp_document_symbols<cr>", "Find Lsp Symbols" },
+			r = { "<cmd>Telescope lsp_references<cr>", "Find Lsp References" },
+			d = { "<cmd>Telescope lsp_definitions<cr>", "Find Lsp Definitions" },
 		},
 		t = { "<cmd>ToggleTerm<cr>", "toggle terminal" },
 		m = { "<cmd>MarkdownPreview<cr>", "markdown preview" },
