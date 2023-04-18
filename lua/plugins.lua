@@ -119,7 +119,8 @@ require("lazy").setup({
 	{
 		"glepnir/lspsaga.nvim",
 		branch = "main",
-		event = "VeryLazy",
+		lazy = true,
+		cmd = "Lspsaga",
 		dependencies = {
 			{ "nvim-tree/nvim-web-devicons" },
 			{ "nvim-treesitter/nvim-treesitter" },
@@ -135,7 +136,10 @@ require("lazy").setup({
 	},
 	{
 		"akinsho/toggleterm.nvim",
-		event = "VeryLazy",
+		lazy = true,
+		keys = {
+			{ "<c-\\>", desc = "toggleterm" },
+		},
 		config = function()
 			require("toggleterm").setup({
 				open_mapping = "<c-\\>",
@@ -209,7 +213,8 @@ require("lazy").setup({
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.1",
-		event = "VeryLazy",
+		lazy = true,
+		cmd = "Telescope",
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-ui-select.nvim" },
 		config = function()
 			require("telescope").setup({
