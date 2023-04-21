@@ -111,7 +111,7 @@ require("lazy").setup({
 		"CRAG666/code_runner.nvim",
 		cmd = { "RunCode", "RunFile", "RunProject" },
 		lazy = true,
-		dependencies = "nvim-lua/plenary.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", "akinsho/toggleterm.nvim" },
 		config = function()
 			require("plugconf.runner")
 		end,
