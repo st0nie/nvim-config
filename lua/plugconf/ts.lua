@@ -3,6 +3,8 @@ require("nvim-treesitter.configs").setup({
 		"c",
 		"bash",
 		"lua",
+		"go",
+		"gomod",
 		"python",
 		"rust",
 		"markdown",
