@@ -140,6 +140,7 @@ require("lazy").setup({
 		keys = {
 			{ "<c-\\>", desc = "toggleterm" },
 		},
+		cmd = "ToggleTerm",
 		config = function()
 			require("toggleterm").setup({
 				open_mapping = "<c-\\>",
@@ -159,7 +160,7 @@ require("lazy").setup({
 	},
 	{
 		"sbdchd/neoformat",
-		lazy = true,
+		event = "BufWritePre",
 		cmd = "Neoformat",
 		init = function()
 			vim.api.nvim_create_autocmd({ "BufWritePre" }, {
@@ -182,7 +183,7 @@ require("lazy").setup({
 							return nil
 						end
 					end
-					vim.cmd("undojoin | Neoformat")
+					vim.cmd([[try | undojoin | Neoformat | catch /E790/ | Neoformat | endtry]])
 				end,
 			})
 		end,
