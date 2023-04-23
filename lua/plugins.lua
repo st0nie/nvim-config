@@ -359,4 +359,11 @@ require("lazy").setup({
 			require("plugconf.ufo_conf")
 		end,
 	},
+	{
+		"lewis6991/satellite.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("satellite").setup()
+		end,
+	},
 })
