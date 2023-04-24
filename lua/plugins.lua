@@ -218,7 +218,26 @@ require("lazy").setup({
 		cmd = "Telescope",
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-ui-select.nvim" },
 		config = function()
+			local actions = require("telescope.actions")
 			require("telescope").setup({
+				defaults = {
+					sorting_strategy = "ascending",
+					layout_config = { prompt_position = "top" },
+					mappings = {
+						i = {
+							["<C-j>"] = {
+								actions.move_selection_next,
+								type = "action",
+								opts = { nowait = true, silent = true },
+							},
+							["<C-k>"] = {
+								actions.move_selection_previous,
+								type = "action",
+								opts = { nowait = true, silent = true },
+							},
+						},
+					},
+				},
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown({}),
