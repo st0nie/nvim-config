@@ -163,6 +163,7 @@ wk.register({
 		"Dap Step Out",
 	},
 
+	gs = { "incremental selection" },
 	gh = { "<cmd>Lspsaga lsp_finder<CR>", "lsp Finder" },
 	gr = { "<cmd>Lspsaga rename<CR>", "lsp Rename" },
 	gd = { "<cmd>Lspsaga goto_definition<CR>", "lsp Goto_Definition" },
