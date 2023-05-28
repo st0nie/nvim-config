@@ -25,6 +25,16 @@ wk.register({
 		"Toggle Terminal",
 	},
 	["<leader>"] = {
+		["."] = {
+			function()
+				wk_alias("<leader>ff")
+			end,
+			"find_files",
+		},
+		[","] = {
+			"<cmd>:e .<cr>",
+			"browse_dir",
+		},
 		w = {
 			function()
 				wk_alias("<c-w>")
