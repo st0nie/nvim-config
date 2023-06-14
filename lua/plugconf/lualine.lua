@@ -1,24 +1,24 @@
 require("lualine").setup({
-	winbar = {
-		lualine_c = {
-			{
-				function()
-					return " : " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":~:.")
-				end,
-			},
-		},
-		lualine_x = {
-			{
-				function()
-					return require("nvim-navic").get_location({ highlight = false })
-				end,
-				cond = function()
-					return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
-				end,
-			},
-		},
-	},
-
+	-- winbar = {
+	-- 	lualine_c = {
+	-- 		{
+	-- 			function()
+	-- 				return " : " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":~:.")
+	-- 			end,
+	-- 		},
+	-- 	},
+	-- 	lualine_x = {
+	-- 		{
+	-- 			function()
+	-- 				return require("nvim-navic").get_location({ highlight = false })
+	-- 			end,
+	-- 			cond = function()
+	-- 				return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
+	-- 			end,
+	-- 		},
+	-- 	},
+	-- },
+	--
 	sections = {
 		lualine_c = {
 			{

@@ -162,31 +162,31 @@ require("lazy").setup({
 		"sbdchd/neoformat",
 		event = "BufWritePre",
 		cmd = "Neoformat",
-		init = function()
-			vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-				callback = function()
-					local exclude_type = { "zsh" }
-					local exclude_name = {}
-					local exclude_ext = {}
-					for i = 1, #exclude_type do
-						if vim.bo.filetype == exclude_type[i] then
-							return nil
-						end
-					end
-					for i = 1, #exclude_name do
-						if vim.fn.expand("%:t") == exclude_name[i] then
-							return nil
-						end
-					end
-					for i = 1, #exclude_ext do
-						if vim.fn.expand("%:e") == exclude_ext[i] then
-							return nil
-						end
-					end
-					vim.cmd([[try | undojoin | Neoformat | catch /E790/ | Neoformat | endtry]])
-				end,
-			})
-		end,
+		-- init = function()
+		-- 	vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+		-- 		callback = function()
+		-- 			local exclude_type = { "zsh" }
+		-- 			local exclude_name = {}
+		-- 			local exclude_ext = {}
+		-- 			for i = 1, #exclude_type do
+		-- 				if vim.bo.filetype == exclude_type[i] then
+		-- 					return nil
+		-- 				end
+		-- 			end
+		-- 			for i = 1, #exclude_name do
+		-- 				if vim.fn.expand("%:t") == exclude_name[i] then
+		-- 					return nil
+		-- 				end
+		-- 			end
+		-- 			for i = 1, #exclude_ext do
+		-- 				if vim.fn.expand("%:e") == exclude_ext[i] then
+		-- 					return nil
+		-- 				end
+		-- 			end
+		-- 			vim.cmd([[try | undojoin | Neoformat | catch /E790/ | Neoformat | endtry]])
+		-- 		end,
+		-- 	})
+		-- end,
 	},
 	{
 		"iamcco/markdown-preview.nvim",
@@ -394,5 +394,17 @@ require("lazy").setup({
 				-- Configuration here, or leave empty to use defaults
 			})
 		end,
+	},
+	{
+		"utilyre/barbecue.nvim",
+		name = "barbecue",
+		version = "*",
+		dependencies = {
+			"SmiteshP/nvim-navic",
+			"nvim-tree/nvim-web-devicons", -- optional dependency
+		},
+		opts = {
+			-- configurations go here
+		},
 	},
 })
