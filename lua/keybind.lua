@@ -174,7 +174,7 @@ wk.register({
 	},
 
 	gs = { "incremental selection" },
-	gh = { "<cmd>Lspsaga lsp_finder<CR>", "lsp Finder" },
+	gh = { "<cmd>Lspsaga finder<CR>", "lsp Finder" },
 	gr = { "<cmd>Lspsaga rename<CR>", "lsp Rename" },
 	gd = { "<cmd>Lspsaga goto_definition<CR>", "lsp Goto_Definition" },
 	gp = { "<cmd>Lspsaga peek_definition<CR>", "lsp Peek_Definition" },
