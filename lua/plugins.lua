@@ -399,6 +399,7 @@ require("lazy").setup({
 		"utilyre/barbecue.nvim",
 		name = "barbecue",
 		version = "*",
+		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			"SmiteshP/nvim-navic",
 			"nvim-tree/nvim-web-devicons", -- optional dependency
@@ -406,5 +407,8 @@ require("lazy").setup({
 		opts = {
 			-- configurations go here
 		},
+		config = function ()
+			require('plugconf.bbq')
+		end
 	},
 })
