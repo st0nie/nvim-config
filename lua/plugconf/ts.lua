@@ -16,6 +16,8 @@ require("nvim-treesitter.configs").setup({
 		"gitcommit",
 		"gitignore",
 		"make",
+		"vim",
+		"vimdoc",
 	},
 	auto_install = false,
 	highlight = {

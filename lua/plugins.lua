@@ -87,7 +87,7 @@ require("lazy").setup({
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
-		event = "VeryLazy",
+		event = { "BufReadPre", "BufNewFile" },
 		build = function()
 			require("nvim-treesitter.install").update({ with_sync = true })
 		end,
@@ -145,14 +145,12 @@ require("lazy").setup({
 			require("toggleterm").setup({
 				open_mapping = "<c-\\>",
 				on_open = function(terminal)
-					local nvimtree = require("nvim-tree")
 					local nvimtree_view = require("nvim-tree.view")
 					if nvimtree_view.is_visible() and terminal.direction == "horizontal" then
-						---@diagnostic disable-next-line: param-type-mismatch
-						local nvimtree_width = vim.fn.winwidth(nvimtree_view.get_winnr())
-						nvimtree.toggle()
-						nvimtree_view.View.width = nvimtree_width
-						nvimtree.toggle(false, true)
+						vim.cmd["NvimTreeClose"]()
+						vim.cmd["NvimTreeOpen"]()
+						vim.cmd["wincmd"]("p")
+						vim.cmd["normal"]("i")
 					end
 				end,
 			})
@@ -275,7 +273,6 @@ require("lazy").setup({
 		dependencies = {
 			"nvim-tree/nvim-web-devicons", -- optional, for file icons
 		},
-		tag = "nightly", -- optional, updated every week. (see issue #1193)
 		init = function()
 			local function open_nvim_tree(data)
 				local directory = vim.fn.isdirectory(data.file) == 1
@@ -407,8 +404,8 @@ require("lazy").setup({
 		opts = {
 			-- configurations go here
 		},
-		config = function ()
-			require('plugconf.bbq')
-		end
+		config = function()
+			require("plugconf.bbq")
+		end,
 	},
 })
