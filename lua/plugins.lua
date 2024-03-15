@@ -7,15 +7,11 @@ end
 
 require("lazy").setup({
 	{
-		"sainnhe/sonokai",
+		"navarasu/onedark.nvim",
 		lazy = false,
 		priority = 1000,
-		init = function()
-			vim.g.sonokai_style = "maia"
-			vim.g.sonokai_better_performance = 1
-		end,
 		config = function()
-			vim.cmd([[colorscheme sonokai]])
+			require("onedark").load()
 		end,
 	},
 	"folke/neodev.nvim",
