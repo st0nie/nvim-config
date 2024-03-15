@@ -141,6 +141,9 @@ require("lazy").setup({
 			require("toggleterm").setup({
 				open_mapping = "<c-\\>",
 				on_open = function(terminal)
+					vim.defer_fn(function()
+						vim.wo[terminal.window].winbar = ""
+					end, 0)
 					local nvimtree_view = require("nvim-tree.view")
 					if nvimtree_view.is_visible() and terminal.direction == "horizontal" then
 						vim.cmd["NvimTreeClose"]()
