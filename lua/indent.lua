@@ -1,6 +1,6 @@
 -- c indent
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-	pattern = { "*.c", "*.h" },
+	pattern = { "*.c", "*.cpp", "*.h", "*.hpp" },
 	callback = function()
 		vim.opt_local.shiftwidth = 2
 		vim.opt_local.tabstop = 2
