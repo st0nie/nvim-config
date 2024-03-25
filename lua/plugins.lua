@@ -247,7 +247,7 @@ require("lazy").setup({
 	{
 		"rcarriga/nvim-dap-ui",
 		event = "VeryLazy",
-		dependencies = { "mfussenegger/nvim-dap", "theHamsta/nvim-dap-virtual-text" },
+		dependencies = { "mfussenegger/nvim-dap", "theHamsta/nvim-dap-virtual-text", "nvim-neotest/nvim-nio" },
 		config = function()
 			require("plugconf/dap-conf")
 		end,
