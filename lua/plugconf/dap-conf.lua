@@ -1,7 +1,7 @@
 local dap, dapui = require("dap"), require("dapui")
 dap.adapters.lldb = {
 	type = "executable",
-	command = "/usr/bin/lldb-vscode",
+	command = "/usr/bin/lldb-dap",
 	name = "lldb",
 }
 dap.configurations.cpp = {
