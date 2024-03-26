@@ -413,4 +413,10 @@ require("lazy").setup({
 			require("guess-indent").setup({})
 		end,
 	},
+	{
+		"keaising/im-select.nvim",
+		config = function()
+			require("im_select").setup({})
+		end,
+	},
 })
