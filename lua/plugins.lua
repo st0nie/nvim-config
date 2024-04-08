@@ -141,15 +141,13 @@ require("lazy").setup({
 			require("toggleterm").setup({
 				open_mapping = "<c-\\>",
 				on_open = function(terminal)
-					vim.defer_fn(function()
-						vim.wo[terminal.window].winbar = ""
-					end, 0)
+					local nvimtree = require("nvim-tree.api")
 					local nvimtree_view = require("nvim-tree.view")
 					if nvimtree_view.is_visible() and terminal.direction == "horizontal" then
-						vim.cmd["NvimTreeClose"]()
-						vim.cmd["NvimTreeOpen"]()
-						vim.cmd["wincmd"]("p")
-						vim.cmd["normal"]("i")
+						local nvimtree_width = vim.fn.winwidth(nvimtree_view.get_winnr())
+						nvimtree.tree.toggle()
+						nvimtree_view.View.width = nvimtree_width
+						nvimtree.tree.toggle(false, true)
 					end
 				end,
 			})
