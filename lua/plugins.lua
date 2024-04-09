@@ -149,6 +149,9 @@ require("lazy").setup({
 						nvimtree_view.View.width = nvimtree_width
 						nvimtree.tree.toggle(false, true)
 					end
+					vim.defer_fn(function()
+						vim.wo[terminal.window].winbar = ""
+					end, 0)
 				end,
 			})
 		end,
